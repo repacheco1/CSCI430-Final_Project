@@ -1,0 +1,15 @@
+language: dart
+dist: focal
+addons:
+  apt:
+    packages:
+      - lib32stdc++6
+install:
+  - git clone https://github.com/flutter/flutter.git -b stable
+  - ./flutter/bin/flutter doctor
+script:
+  - cd $TRAVIS_BUILD_DIR/booking_app/
+  - ../flutter/bin/flutter analyze
+cache:
+  directories:
+    - $HOME/.pub-cache
