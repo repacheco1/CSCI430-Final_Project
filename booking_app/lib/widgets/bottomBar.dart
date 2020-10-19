@@ -10,15 +10,15 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBar extends State<BottomBar> {
-  final List<Widget> pages = [
-    ReservationPage(
-      key: PageStorageKey('ReservationPage'),
+  final List<Widget> pages = <Widget>[
+    const ReservationPage(
+      key: PageStorageKey<String>('ReservationPage'),
     ),
-    HomePage(
-      key: PageStorageKey('HomePage'),
+    const HomePage(
+      key: PageStorageKey<String>('HomePage'),
     ),
-    BookingsPage(
-      key: PageStorageKey('BookingsPage'),
+    const BookingsPage(
+      key: PageStorageKey<String>('BookingsPage'),
     ),
   ];
 
@@ -53,4 +53,7 @@ class _BottomBar extends State<BottomBar> {
     );
   }
   
+}
+
+class T {
 }

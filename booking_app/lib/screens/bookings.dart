@@ -8,11 +8,11 @@ class BookingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Bookings"),
+        title: const Text('Bookings'),
       ),
-      body: ListView.builder(itemBuilder: (context, index) {
+      body: ListView.builder(itemBuilder: (BuildContext context, int index) {
         return ListTile(
-          title: Text('Lorem Ipsum'),
+          title: const Text('Lorem Ipsum'),
           subtitle: Text('$index'),
         );
       }),

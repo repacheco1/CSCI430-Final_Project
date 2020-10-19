@@ -8,11 +8,11 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Home"),
+        title: const Text('Home'),
       ),
-      body: ListView.builder(itemBuilder: (context, index) {
+      body: ListView.builder(itemBuilder: (BuildContext context, int index) {
         return ListTile(
-          title: Text('Lorem Ipsum'),
+          title: const Text('Lorem Ipsum'),
           subtitle: Text('$index'),
         );
       }),
