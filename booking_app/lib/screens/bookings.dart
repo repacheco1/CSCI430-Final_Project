@@ -16,7 +16,7 @@ class BookingsPage extends StatelessWidget {
         actions: <Widget>[
           FlatButton.icon(
             icon: const Icon(Icons.person),
-            label: const Text('logout'),
+            label: const Text('Logout'),
             onPressed: () async {
               await _auth.signOut();
             },
