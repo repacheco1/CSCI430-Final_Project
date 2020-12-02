@@ -1,3 +1,4 @@
+import 'package:booking_app/screens/business_detail.dart';
 import 'package:booking_app/services/auth.dart';
 import 'package:booking_app/services/http_service.dart';
 import 'package:flutter/material.dart';
@@ -27,23 +28,73 @@ class ReservationPage extends StatelessWidget {
             ),
           ],
         ),
-        body: FutureBuilder(
-          future: httpService.getPosts(),
-          builder:
-              (BuildContext context, AsyncSnapshot<List<Business>> snapshot) {
-            if (snapshot.hasData) {
-              // ignore: omit_local_variable_types
-              final List<Business> business = snapshot.data;
-              return ListView(
-                children: business
-                    .map((Business businesses) => ListTile(
-                          title: Text(businesses.name),
-                        ))
-                    .toList(),
-              );
-            }
-            return const Center(child: CircularProgressIndicator());
-          },
-        ));
+        body: Center(
+          child: FutureBuilder<List<Business>>(
+              future: httpService.getPosts(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          return Center(
+                            child: Card(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  const Padding(padding: EdgeInsets.all(8.0)),
+                                  ListTile(
+                                    leading: Image.network(
+                                        snapshot.data[index].imageUrl,
+                                        width: 80,
+                                        height: 80),
+                                    // ignore: unnecessary_string_interpolations
+                                    title: Text('${snapshot.data[index].name}'),
+                                    subtitle:
+                                        Text('${snapshot.data[index].rating}'),
+                                    trailing:
+                                        // ignore: unnecessary_string_interpolations
+                                        Text('${snapshot.data[index].price}'),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute<void>(
+                                            builder: (context) =>
+                                                BusinessDetail(
+                                                    business:
+                                                        snapshot.data[index])),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                  );
+                }
+                return const Center(child: CircularProgressIndicator());
+              }),
+        )
+        // body: FutureBuilder(
+        //   future: httpService.getPosts(),
+        //   builder:
+        //       (BuildContext context, AsyncSnapshot<List<Business>> snapshot) {
+        //     if (snapshot.hasData) {
+        //       // ignore: omit_local_variable_types
+        //       final List<Business> business = snapshot.data;
+        //       return ListView(
+        //         children: business
+        //             .map((Business businesses) => ListTile(
+        //                   title: Text(businesses.name),
+        //                 ))
+        //             .toList(),
+        //       );
+        //     }
+        //     return const Center(child: CircularProgressIndicator());
+        //   },
+        // )
+        );
   }
 }
