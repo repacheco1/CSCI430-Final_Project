@@ -4,6 +4,8 @@ class Business {
   final double rating;
   final String price;
   final String phone;
+  // ignore: non_constant_identifier_names
+  final String display_phone;
   final String id;
   final String name;
 
@@ -31,6 +33,8 @@ class Business {
       {this.rating,
       this.price,
       this.phone,
+      // ignore: non_constant_identifier_names
+      this.display_phone,
       this.id,
       this.name,
       this.latitude,
@@ -47,7 +51,8 @@ class Business {
       this.city,
       this.state,
       this.country,
-      this.zip});
+      this.zip,
+      });
 
   // ignore: sort_constructors_first
   factory Business.fromJson(Map<String, dynamic> json) {
@@ -55,6 +60,7 @@ class Business {
       rating: json['rating'] as double,
       price: json['price'] as String,
       phone: json['phone'] as String,
+      display_phone: json['display_phone'] as String,
       id: json['id'] as String,
       name: json['name'] as String,
       latitude: json['coordinates']['latitude'] as double,
