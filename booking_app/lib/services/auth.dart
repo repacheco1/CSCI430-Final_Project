@@ -69,4 +69,9 @@ class AuthService {
       return null;
     }
   }
+
+  Future getUser() async {
+    final dynamic user = FirebaseAuth.instance.currentUser;
+    return user;
+  }
 }
