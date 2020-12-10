@@ -1,13 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_app/services/auth.dart';
 
-class BookingsPage extends StatelessWidget {
+class BookingsPage extends StatefulWidget {
   const BookingsPage({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    // ignore: omit_local_variable_types
+  _BookingsPageState createState() => _BookingsPageState();
+}
+
+class _BookingsPageState extends State<BookingsPage> {
     final AuthService _auth = AuthService();
+    String uid = '';
+    @override
+    void initState() {
+      super.initState();
+      uid = _auth.theUser().toString();
+    }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -23,12 +35,35 @@ class BookingsPage extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView.builder(itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          title: const Text('Lorem Ipsum'),
-          subtitle: Text('$index'),
-        );
-      }),
+      body: StreamBuilder(
+        // ignore: unnecessary_string_interpolations
+        stream: FirebaseFirestore.instance.collection('reservation').where('Uid', isEqualTo: '$uid').snapshots(),
+        // ignore: missing_return
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if(!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return ListView(
+            children: snapshot.data.docs.map((doc) {
+              return Card(
+                child: ListTile(
+                  title: Text('${doc.get('name')}'),
+                  subtitle: Text('Date: ${doc.get('date')} Time: ${doc.get('time')}'),
+                  trailing: const Icon(Icons.fastfood),
+                ),
+              );
+            }).toList(),
+          );
+          // return Center(
+          //   child: Container(
+          //     // ignore: unnecessary_string_interpolations
+          //     child: Text('${uid}'),
+          //   ),
+          // );
+        },
+      ),
     );
   }
 }

@@ -74,4 +74,10 @@ class AuthService {
     final dynamic user = FirebaseAuth.instance.currentUser;
     return user;
   }
+
+  String theUser() {
+    final user = FirebaseAuth.instance.currentUser;
+    final uid = user.uid.toString();
+    return uid;
+  }
 }
