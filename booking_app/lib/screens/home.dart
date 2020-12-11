@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
               Image.asset('assets/images/logo.png', height: 400, width: 400),
               const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text('Reserve your favorite seat at your favorite Restaurant here!', 
+                child: Text('Reserve your favorite seat at your favorite restaurant here!', 
                             style: TextStyle(fontSize: 20), 
                             textAlign: TextAlign.center
                         ),

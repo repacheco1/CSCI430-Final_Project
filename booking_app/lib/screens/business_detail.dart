@@ -2,11 +2,10 @@ import 'package:booking_app/models/business.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_app/services/auth.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 
 class BusinessDetail extends StatefulWidget {
   final Business business;
-  //final AsyncSnapshot<List<Business>> business;
 
   // ignore: sort_constructors_first
   const BusinessDetail({this.business});
@@ -25,7 +24,6 @@ class _BusinessDetailState extends State<BusinessDetail> {
   DateTime datePicked;
   TimeOfDay timePicked;
 
-
   @override
   void initState() {
     super.initState();
@@ -42,77 +40,90 @@ class _BusinessDetailState extends State<BusinessDetail> {
       ),
       body: Column(
         children: <Widget> [
-          Image.network(widget.business.imageUrl, width: 600, height: 240, fit: BoxFit.fill,),
           
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('City: ' + widget.business.city, style: const TextStyle(fontSize: 20)),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Address: ' + widget.business.address1, style: const TextStyle(fontSize: 20),  
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Zip code: ' + widget.business.zip, style: const TextStyle(fontSize: 20)),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Phone Number: ' + widget.business.display_phone, style: const TextStyle(fontSize: 20)
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            // ignore: prefer_const_literals_to_create_immutables
-            children: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  print('Hello');
-                  _pickDate();
-                  print(datePicked);
-                },
-                child: const Text('Pick day'),
-                color: Colors.green,
+          Image.network(widget.business.imageUrl, width: 600, height: 240, fit: BoxFit.fill,),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 40.0)
               ),
-              FlatButton(
-                onPressed: () {
-                  _pickTime();
-                },
-                child: const Text('Pick time'),
-                color: Colors.green,
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget> [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('${datePicked.month}/' '${datePicked.day}/' '${datePicked.year}', 
-                style: const TextStyle(fontSize: 20)
+                child: Text('City: ' + widget.business.city, style: const TextStyle(fontSize: 20)),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Address: ' + widget.business.address1, style: const TextStyle(fontSize: 20),  
                 ),
               ),
               Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('${timePicked.hour}:${timePicked.minute}', 
-                  style: const TextStyle(fontSize: 20),
-                  ),
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Zip code: ' + widget.business.zip, style: const TextStyle(fontSize: 20)),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Phone Number: ' + widget.business.display_phone, style: const TextStyle(fontSize: 20)
                 ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 40.0)
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                // ignore: prefer_const_literals_to_create_immutables
+                children: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      _pickDate();
+                    },
+                    child: const Text('Pick day'),
+                    color: Colors.green,
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      _pickTime();
+                    },
+                    child: const Text('Pick time'),
+                    color: Colors.green,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget> [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('${datePicked.month}/' '${datePicked.day}/' '${datePicked.year}', 
+                    style: const TextStyle(fontSize: 20)
+                    ),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('${timePicked.hour}:${timePicked.minute}', 
+                      style: const TextStyle(fontSize: 20),
+                      ),
+                    ),
+                ],
+              ),
+              FlatButton(
+                onPressed: () {
+                  // ignore: unnecessary_string_interpolations
+                  reservationName = '${widget.business.name}';
+                  _setReservation();
+                  Navigator.pop(context);
+                  Fluttertoast.showToast(
+                    msg: '${widget.business.name} reservation has been saved in Bookings'
+                  );
+                },
+                child: const Text('Confirm'),
+                color: Colors.green,
+              ),
             ],
           ),
-          FlatButton(
-            onPressed: () {
-              // ignore: unnecessary_string_interpolations
-              reservationName = '${widget.business.name}';
-              _setReservation();
-              Navigator.pop(context);
-            },
-            child: const Text('Confirm'),
-            color: Colors.green,
-          ),
+          
         ],
-        //child: Image.network(business.imageUrl),
       ),
     );
   }
