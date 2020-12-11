@@ -19,6 +19,7 @@ class Business {
 
   final String url;
   final String imageUrl;
+  final List<String> photos;
 
   final String address1;
   final String address2;
@@ -45,6 +46,7 @@ class Business {
       this.reviewCount,
       this.url,
       this.imageUrl,
+      this.photos,
       this.address1,
       this.address2,
       this.address3,
@@ -72,6 +74,7 @@ class Business {
       reviewCount: json['review_count'] as int,
       url: json['url'] as String,
       imageUrl: json['image_url'] as String,
+      photos: json['photos'] as List<String>,
       address1: json['location']['address1'] as String,
       address2: json['location']['address2'] as String,
       address3: json['location']['address3'] as String,

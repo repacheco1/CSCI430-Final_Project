@@ -51,17 +51,14 @@ class _BookingsPageState extends State<BookingsPage> {
                 child: ListTile(
                   title: Text('${doc.get('name')}'),
                   subtitle: Text('Date: ${doc.get('date')} Time: ${doc.get('time')}'),
-                  trailing: const Icon(Icons.fastfood),
+                  trailing: const Icon(
+                    Icons.fastfood, 
+                    color: Colors.orange
+                  ),
                 ),
               );
             }).toList(),
           );
-          // return Center(
-          //   child: Container(
-          //     // ignore: unnecessary_string_interpolations
-          //     child: Text('${uid}'),
-          //   ),
-          // );
         },
       ),
     );

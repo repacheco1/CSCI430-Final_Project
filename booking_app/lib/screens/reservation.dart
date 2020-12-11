@@ -43,19 +43,22 @@ class ReservationPage extends StatelessWidget {
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
-                                  const Padding(padding: EdgeInsets.all(8.0)),
                                   ListTile(
-                                    leading: Image.network(
-                                        snapshot.data[index].imageUrl,
-                                        width: 80,
-                                        height: 80),
+                                    leading:  CircleAvatar(
+                                      radius: 30.0,
+                                      backgroundImage: NetworkImage(snapshot.data[index].imageUrl),
+                                      backgroundColor: Colors.transparent,
+                                    ),
                                     // ignore: unnecessary_string_interpolations
                                     title: Text('${snapshot.data[index].name}'),
                                     subtitle:
-                                        Text('${snapshot.data[index].rating}'),
+                                        Text('${snapshot.data[index].rating}' ),
                                     trailing:
-                                        // ignore: unnecessary_string_interpolations
-                                        Text('${snapshot.data[index].price}'),
+                                        Text(
+                                          // ignore: unnecessary_string_interpolations
+                                          '${snapshot.data[index].price}',
+                                          style: const TextStyle(color: Colors.green),
+                                          ),
                                     onTap: () {
                                       Navigator.push(
                                         context,
