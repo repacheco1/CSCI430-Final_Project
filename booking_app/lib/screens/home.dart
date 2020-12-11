@@ -22,13 +22,21 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView.builder(itemBuilder: (BuildContext context, int index) {
-        //BottomBar();
-        return ListTile(
-          title: const Text('Lorem Ipsum'),
-          subtitle: Text('$index'),
-        );
-      }),
+      body: Center(
+        child: Column(
+          // ignore: prefer_const_literals_to_create_immutables
+          children: <Widget> [
+              Image.asset('images/logo.png', height: 400, width: 400),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Reserve your favorite seat at your favorite Restaurant here!', 
+                            style: TextStyle(fontSize: 20), 
+                            textAlign: TextAlign.center
+                        ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
