@@ -47,7 +47,7 @@ class _BusinessDetailState extends State<BusinessDetail> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Padding(
-                padding: EdgeInsets.only(top: 40.0)
+                padding: EdgeInsets.only(top: 10.0)
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -68,7 +68,7 @@ class _BusinessDetailState extends State<BusinessDetail> {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.only(top: 40.0)
+                padding: EdgeInsets.only(top: 10.0)
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

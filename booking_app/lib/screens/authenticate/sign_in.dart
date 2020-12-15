@@ -43,14 +43,37 @@ class _SignInState extends State<SignIn> {
               child: Column(
                 children: [
                   const SizedBox(height: 20.0),
+                  const Text(
+                    'Email', 
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
                   TextFormField(
                       decoration:
-                          textInputDecoration.copyWith(hintText: 'Email'),
-                      validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                          textInputDecoration.copyWith(
+                          hintText: 'bob@example.com',
+                        ),
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (val){
+                        if (val.isEmpty) {
+                          return 'Please enter email';
+                        } else if (!val.contains('@')) {
+                          return 'Please enter valid email';
+                        } else {
+                          return null;
+                        } 
+                      },
                       onChanged: (val) {
                         setState(() => email = val);
                       }),
                   const SizedBox(height: 20.0),
+                  const Text(
+                    'Password', 
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
                   TextFormField(
                     decoration:
                         textInputDecoration.copyWith(hintText: 'Password'),
@@ -76,7 +99,7 @@ class _SignInState extends State<SignIn> {
                             .signInWithEmailAndPassword(email, password);
                         if (result == null) {
                           setState(() =>
-                              error = 'Could not sign with those credentials');
+                              error = 'Could not sign with those credentials.');
                         }
                       }
                     },
